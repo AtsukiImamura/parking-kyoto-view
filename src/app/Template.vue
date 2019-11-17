@@ -1,15 +1,15 @@
 <template>
-    <div></div>
+  <div></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-    components: {}
+  components: {}
 })
 export default class Template extends Vue {
-    public mounted(): void {}
+  public mounted(): void {}
 }
 </script>
 

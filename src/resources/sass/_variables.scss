@@ -2,4 +2,156 @@
   width: calc(100vw - 240px);
   max-width: 1200px;
   margin: 0 auto;
+  @include xs {
+    width: calc(100vw - 65px);
+  }
+}
+
+/* レスポンシブ */
+@mixin xl {
+  @media screen and (min-width: 1180px) {
+    @content;
+  }
+}
+@mixin lg {
+  @media screen and (min-width: 960px) and (max-width: 1180px) {
+    @content;
+  }
+}
+@mixin md {
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (min-width: 540px) and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin xs {
+  @media screen and (max-width: 540px) {
+    @content;
+  }
+}
+
+@mixin responsive-width($xl, $lg, $md, $sm, $xs) {
+  @include xl {
+    width: $xl;
+  }
+  @include lg {
+    width: $lg;
+  }
+  @include md() {
+    width: $md;
+  }
+  @include sm() {
+    width: $sm;
+  }
+  @include xs() {
+    width: $xs;
+  }
+}
+
+@mixin about-main {
+  margin: 10px auto;
+  // padding: 0 15px;
+  width: calc(85vw - 300px);
+  @include md {
+    width: calc(95vw - 300px);
+  }
+  @include xs {
+    margin: 8px 5px;
+    width: calc(100vw - 65px);
+  }
+  .top {
+    .main-title {
+      font-size: 54px;
+      margin: 10px 0;
+      padding: 5px 0;
+      color: #009000;
+      @include xs {
+        font-size: 40px;
+      }
+    }
+  }
+  .content-area {
+    margin: 55px 0;
+    width: 100%;
+    @include xs {
+      margin: 30px 0;
+    }
+    .title {
+      margin: 20px 0;
+      font-size: 22px;
+      width: 100%;
+      border-bottom: 1px solid #c0c0c0;
+      padding: 8px;
+      @include xs {
+        margin: 10px 0;
+      }
+    }
+    .content {
+      margin: 5px 0;
+      padding: 8px 8px 8px 20px;
+      @include xs {
+        padding: 8px;
+      }
+    }
+    p {
+      margin: 3px 0;
+    }
+    ul,
+    ol {
+      margin: 8px 0;
+      @include xs {
+        padding-left: 30px;
+      }
+      li {
+        margin: 4px 0;
+      }
+    }
+  }
+  .next-contents {
+    margin: 80px 0;
+    padding: 5px;
+    @include xs {
+      margin: 40px 0 20px;
+    }
+    .list {
+      display: flex;
+      justify-content: space-around;
+      @include xs {
+        display: block;
+      }
+      .c {
+        list-style: none;
+        width: 200px;
+        border: 1px solid #009000;
+        text-align: center;
+        margin: 8px 0;
+        a {
+          color: #009000;
+          display: block;
+          width: 100%;
+          //   height: 100%;
+          padding: 8px 0;
+          @keyframes box-button-hover {
+            from {
+              background-color: #ffffff;
+            }
+            to {
+              background-color: rgba(0, 144, 0, 0.15);
+            }
+          }
+          transition: background-color 0.3s;
+          &:hover {
+            // animation: box-button-hover 0.5s ease-out 0s 1 forwards running;
+            transition: background-color 0.5s;
+            background-color: rgba(104, 180, 104, 0.15);
+          }
+        }
+      }
+    }
+  }
 }

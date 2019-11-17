@@ -1,16 +1,16 @@
 <template>
     <div class="main">
-        <DataTable></DataTable>
+        <ParkingData></ParkingData>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 // import AppHeader from "./common/AppHeader.vue";
-import DataTable from "./components/DataTable.vue";
+import ParkingData from "./data/ParkingData.vue";
 
 @Component({
-    components: { DataTable }
+    components: { ParkingData }
 })
 export default class App extends Vue {
     public mounted(): void {}
