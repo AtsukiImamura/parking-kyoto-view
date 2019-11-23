@@ -58,7 +58,10 @@ export default class ParkingUtil {
               ? parking.coordinates[1]
               : 0
             : 0
-        }
+        },
+        unit_price: parking.unit_price,
+        unit_period: parking.unit_period,
+        hourly_prices: parking.hourly_prices
       };
     });
     return res;

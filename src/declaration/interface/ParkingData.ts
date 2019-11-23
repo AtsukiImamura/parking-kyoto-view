@@ -6,6 +6,11 @@ interface IParkingDataBase {
   roads: number[];
   entranses: number[];
   coop_target: string;
+
+  unit_price: number;
+  unit_period: number;
+
+  hourly_prices: Map<string, number>;
 }
 
 export interface IParkingData extends IParkingDataBase {
@@ -21,7 +26,7 @@ export interface IParkingDisplayData extends IParkingDataBase {
   has_roof: IDisplayValue<boolean>;
   can_park_in: IDisplayValue<boolean>;
   multi_floors: IDisplayValue<boolean>;
-  system: IDisplayValue<string>;
+  system: IDisplayValue<number>;
   coop: IDisplayValue<boolean>;
   coordinates: ICoordinates;
 }

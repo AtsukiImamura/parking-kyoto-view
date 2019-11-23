@@ -1,16 +1,24 @@
 <script lang="ts">
 import { Component, Mixins } from "vue-property-decorator";
-import { Scatter } from "vue-chartjs";
+import { Scatter, Bubble } from "vue-chartjs";
 import { ChartData, ChartOptions } from "chart.js";
+import Axios from "axios";
+import { IParkingData } from "../../declaration/interface/ParkingData";
 
 @Component({
   components: {}
 })
-export default class ParkLocationChart extends Mixins(Scatter) {
-  // public parkings: IParkingData[] = [];
+export default class ParkLocationChart extends Mixins(Bubble) {
+  public parkings: IParkingData[] = [];
 
   public mounted(): void {
-    this.renderChart(this.chartData, this.options);
+    Axios.get("parking.json")
+      .then(res => {
+        this.parkings = res.data as IParkingData[];
+      })
+      .then(() => {
+        this.renderChart(this.chartData, this.options);
+      });
   }
 
   public get chartData(): ChartData {
@@ -27,11 +35,21 @@ export default class ParkLocationChart extends Mixins(Scatter) {
       });
     }
 
+    const bubbles: { x: number; y: number; r: number }[] = this.parkings.map(
+      parking => {
+        return {
+          x: parking.coordinates[0],
+          y: parking.coordinates[1],
+          r: (parking.num + parking.light_num) * 2
+        };
+      }
+    );
+
     return {
       datasets: [
         {
-          label: "random",
-          data: values,
+          // label: "random",
+          data: bubbles,
           borderWidth: 1,
           borderColor: "#009000",
           pointRadius: 2,
@@ -45,7 +63,27 @@ export default class ParkLocationChart extends Mixins(Scatter) {
 
   public options = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [
+        {
+          display: false
+          // ticks: {
+          //   callback: function(value, index, values) {
+          //     return Math.floor(Number(value) * 100) / 100;
+          //   }
+          // }
+        }
+      ],
+      xAxes: [
+        {
+          display: false
+        }
+      ]
+    }
   } as ChartOptions;
 }
 </script>

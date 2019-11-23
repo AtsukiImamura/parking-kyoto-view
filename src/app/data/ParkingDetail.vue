@@ -28,9 +28,27 @@
           <div class="value">{{ parking.coordinates.y }}</div>
         </div>
       </div>
+      <div class="price-info info-area" v-if="parking.hourly_prices">
+        <div class="title">
+          <h3>料金</h3>
+        </div>
+        <div class="unit-info">
+          <div class="unit">
+            <div class="key">昼間単位価格</div>
+            <div class="value">{{ parking.unit_price }}円</div>
+          </div>
+          <div class="unit">
+            <div class="key">昼間単位時間</div>
+            <div class="value">{{ parking.unit_period }}分</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <PriceChart :price-info="parking.hourly_prices"></PriceChart>
+        </div>
+      </div>
       <div class="detail-info info-area">
         <div class="title">
-          <h3>詳細</h3>
+          <h3>属性</h3>
         </div>
         <div class="info">
           <div class="key">駐車台数（普通車）</div>
@@ -109,9 +127,10 @@
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 import { IParkingDisplayData } from "../../declaration/interface/ParkingData";
+import PriceChart from "./PriceChart.vue";
 
 @Component({
-  components: {}
+  components: { PriceChart }
 })
 export default class ParkingDetail extends Vue {
   @Prop() public parking!: IParkingDisplayData;
@@ -213,7 +232,7 @@ export default class ParkingDetail extends Vue {
       width: 90%;
       margin: 25px auto;
       .title {
-        margin: 15px 0 0 0;
+        margin: 15px 0 10px 0;
         padding: 8px 0px;
         color: #808080;
         h3 {
@@ -240,6 +259,47 @@ export default class ParkingDetail extends Vue {
           @include xs {
             width: 48%;
           }
+        }
+      }
+    }
+    .price-info {
+      .unit-info {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 5px 0 20px;
+        .unit {
+          width: 50%;
+          @include xs {
+            width: 100%;
+            margin-top: 5px;
+          }
+          display: flex;
+          margin-right: -1px;
+          .key,
+          .value {
+            border: 1px solid #c0c0c0;
+            padding: 8px 12px;
+            @include xs {
+              border-width: 0;
+              padding: 5px 1.5%;
+            }
+          }
+          .key {
+            background-color: #f8f8f8;
+            width: 40%;
+            border-right-width: 0px;
+          }
+          .value {
+            width: 60%;
+          }
+        }
+      }
+      .chart-area {
+        width: 80%;
+        margin: 0 auto;
+        @include xs {
+          width: 100%;
         }
       }
     }

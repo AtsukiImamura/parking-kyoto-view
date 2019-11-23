@@ -78,29 +78,5 @@ export default class ParkingAttrSummary extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.charts {
-  width: 80%;
-  .chart-area {
-    width: 100%;
-    height: 400px;
-    margin-bottom: 100px;
-    &.multi {
-      display: flex;
-      flex-basis: 50%;
-      justify-content: space-around;
-      @include xs {
-        display: flex;
-        flex-direction: column;
-        height: 900px;
-      }
-    }
-    .chart {
-      width: 100%;
-      height: 300px;
-      @include xs {
-        height: 240px;
-      }
-    }
-  }
-}
+@include charts;
 </style>
